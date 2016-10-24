@@ -1,24 +1,38 @@
 <% include ./partials/header %>
 
-
-<table class="ui celled table">
-  <thead>
-    <tr>
-      <td>Location</td>
-      <td>Address</td>
-      <td>PostalCode</td>
-    </tr>
-  </thead>
-  <tbody>
-    <% parks.forEach(function(park){ %>
-    <tr>
-        <td><%= park.LocationName %></td>
-        <td><%= park.Address %></td>
-        <td><%= park.PostalCode %></td>
-    </tr>
-    <% }); %>
-    </tbody>
-  </table>
+<div class="ui container main">
+  <h1>Park List</h1>
+  <table class="ui celled table">
+    <thead>
+      <tr>
+        <td>Location</td>
+        <td>Address</td>
+        <td>PostalCode</td>
+        <td><i class="write icon"></i></td>
+        <td><i class="trash icon"></i></td>
+      </tr>
+    </thead>
+    <tbody>
+      <% parks.forEach(function(park){ %>
+      <tr>
+          <td><a href="/parks/<%= park._id %>"><%= park.LocationName %></a></td>
+          <td><%= park.Address %></td>
+          <td><%= park.PostalCode %></td>
+          <td>
+            <form class="" action="/parks/<%= park._id %>/edit" method="GET">
+              <button class="ui button inverted blue"><i class="ui write icon"></i></button>
+            </form>
+          </td>
+          <td>
+            <form class="" action="/parks/<%= park._id %>?_method=DELETE" method="POST">
+              <button class="ui button inverted red"><i class="ui trash icon"></i></button>
+            </form>
+          </td>
+      </tr>
+      <% }); %>
+      </tbody>
+    </table>
+</div>
 
 
 

@@ -1,0 +1,27 @@
+<% include ./partials/header %>
+
+<div class="ui container main">
+  <div class="ui inverted segment teal">
+    <h1><%= park.LocationName %></h1>
+    <div class="ui inverted red">
+      <div class="two fields">
+        <div class="field">
+          <label for="">Address</label>
+          <div><%= park.Address %></div>
+        </div>
+        <div class="field">
+          <label for="">Postal Code</label>
+          <div><%= park.PostalCode %></div>
+        </div>
+      </div>
+      <div class="container">
+        <a href="/parks/<%= park._id %>/edit" class="ui submit blue button">Edit</a>
+        <form id="delete" class="" action="/parks/<%= park._id %>?_method=DELETE" method="POST">
+          <button  href="" class="ui submit red button">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% include ./partials/footer %>

@@ -1,0 +1,26 @@
+<% include ./partials/header %>
+
+<div class="ui container main">
+  <div class="ui inverted segment teal">
+    <h1>Edit</h1>
+    <form class="ui inverted form red" action="/parks/<%= park._id %>?_method=PUT" method="POST">
+      <div class="three fields">
+        <div class="field">
+          <label for="">Park Name</label>
+          <input type="text" name="park[LocationName]" value="<%= park.LocationName %>" placeholder="Name">
+        </div>
+        <div class="field">
+          <label for="">Address</label>
+          <input type="text" name="park[Address]" value="<%= park.Address %>" placeholder="Address">
+        </div>
+        <div class="field">
+          <label for="">Postal Code</label>
+          <input type="text" name="park[PostalCode]" value="<%= park.PostalCode %>" placeholder="PostalCode">
+        </div>
+      </div>
+      <input type="submit" class="ui submit red button">
+    </form>
+  </div>
+</div>
+
+<% include ./partials/footer %>

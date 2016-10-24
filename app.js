@@ -26403,9 +26403,67 @@ app.get('/parks', function (req, res) {
   });
 });
 
-// /ROUTE
+// ROOT ROUTE
 app.get('/', function (req, res) {
   res.redirect('/parks');
+});
+
+// NEW ROUTE
+app.get('/parks/new', function (req, res) {
+  res.render('new');
+});
+
+// CREATE ROUTE
+app.post('/parks', function (req, res) {
+  req.body.park.body = req.sanitize(req.body.park.body);
+  Park.create(req.body.park, function (err, park) {
+    if(err){
+      console.log(err);
+    } else {
+      res.redirect('/parks');
+    }
+  });
+});
+
+//SHOW ROUTE
+app.get('/parks/:id', function (req, res) {
+  Park.findById(req.params.id, function (err, park) {
+    if(err){
+      console.log(err);
+    } else {
+      res.render('show', {park: park});
+    }
+  });
+});
+
+//EDIT ROUTE
+app.get('/parks/:id/edit', function (req, res) {
+  Park.findById(req.params.id, function (err, park) {
+    if(err) {
+      console.log(err);
+    } else {
+      res.render('edit', {park: park});
+    }
+  });
+});
+
+//UPDATE ROUTE
+app.put('/parks/:id', function(req, res) {
+  req.body.park.body = req.sanitize(req.body.park.body);
+  Park.findByIdAndUpdate(req.params.id, req.body.park, function(err, park) {
+    if(err){
+      res.redirect('/parks');
+    } else {
+      res.redirect('/parks/' + req.params.id);
+    }
+  });
+});
+
+//DELETE ROUTE
+app.delete('/parks/:id', function (req, res) {
+  Park.findByIdAndRemove(req.params.id, function (err) {
+    err ? console.log(err) : res.redirect('/parks');
+  });
 });
 
 app.listen(3000, function(){
